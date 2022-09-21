@@ -1,0 +1,170 @@
+- sensor:
+      - name: Storion System mode
+        unique_id: sensor.storion_system_mode_templ
+        state: >
+            {% if states("sensor.storion_system_mode")|int == 1 %}
+              AC Mode
+            {% elif states("sensor.storion_system_mode")|int == 2 %}
+              DC mode
+            {% else %}
+              Hybrid mode
+            {%- endif %}
+      -  name: Storion PV Power
+         unique_id: sensor.storion_pv_meter_templ
+         unit_of_measurement: 'W'
+         device_class: power
+         state: >
+          {{ states("sensor.storion_pv1_power") |float + states("sensor.storion_pv2_power") | float }}
+      -  name: Storion Grid Consumption
+         unique_id: sensor.storion_grid_consumption_templ
+         unit_of_measurement: 'W'
+         device_class: power
+         state: >
+          {{ states("sensor.storion_total_active_power_grid_meter") |float }}
+      -  name: House Power Load
+         unique_id: sensor.storion_grid_load_templ
+         unit_of_measurement: 'W'
+         device_class: power
+         state: >
+          {{ states("sensor.storion_total_active_power_grid_meter") |float + states("sensor.storion_inverter_power_total") |float}}
+      - name: Storion Battery Status
+        unique_id: sensor.storion_battery_status_templ
+        device_class: battery
+        state: >
+            {% if states("sensor.storion_battery_power")|float > 0 %}
+              Discharging
+            {% elif states("sensor.storion_battery_power")|float < 0 %}
+              Charging
+              {% else %}
+              Status Quo
+            {%- endif %}
+      - name: Storion Inverter Work Mode
+        unique_id: sensor.storion_inverter_work__mode_templ
+        state: >
+            {% if states("sensor.storion_inverter_work_mode")|int == 0 %}
+                Wait Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 1 %}
+                Online Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 2 %}
+                UPS Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 3 %}
+                Bypass Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 4 %}
+                Fault Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 5 %}
+                DC Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 6 %}
+                SelfTest Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 7 %}
+                Check Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 8 %}
+                Update Master Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 9 %}
+                Update Slave Mode
+            {% elif states("sensor.storion_inverter_work_mode")|int == 10 %}
+                Update ARM Mode
+            {% else %}
+              {{states("sensor.storion_inverter_work_mode")|int }}
+            {%- endif %}
+      - name: Storion Inverter Grid Regulation
+        unique_id: sensor.sensor.storion_grid_regulation_templ
+        state: >
+            {% if states("sensor.storion_grid_regulation")|int == 0 %}
+                VDE0126-50Hz
+            {% elif states("sensor.storion_grid_regulation")|int == 1 %}
+                VDE4105/11.18
+            {% elif states("sensor.storion_grid_regulation")|int == 2 %}
+                AS4777.2
+            {% elif states("sensor.storion_grid_regulation")|int == 3 %}
+                G83_2
+            {% elif states("sensor.storion_grid_regulation")|int == 4 %}
+                C10/C11
+            {% elif states("sensor.storion_grid_regulation")|int == 5 %}
+                TOR Erzeuger
+            {% elif states("sensor.storion_grid_regulation")|int == 6 %}
+               EN50549-NL
+            {% elif states("sensor.storion_grid_regulation")|int == 7 %}
+                EN50549-DK
+            {% elif states("sensor.storion_grid_regulation")|int == 8 %}
+                CEB
+            {% elif states("sensor.storion_grid_regulation")|int == 9 %}
+                CEI-021
+            {% elif states("sensor.storion_grid_regulation")|int == 10 %}
+                NRS097-2-1
+            {% elif states("sensor.storion_grid_regulation")|int == 11 %}
+                EN50549-GR
+            {% elif states("sensor.storion_grid_regulation")|int == 12 %}
+                UTE_C15_712
+            {% elif states("sensor.storion_grid_regulation")|int == 13 %}
+                IEC61727
+            {% elif states("sensor.storion_grid_regulation")|int == 14 %}
+                G59_3
+            {% elif states("sensor.storion_grid_regulation")|int == 15 %}
+                RD1699
+            {% elif states("sensor.storion_grid_regulation")|int == 16 %}
+                G99
+            {% elif states("sensor.storion_grid_regulation")|int == 18 %}
+                VDE0126-60Hz
+            {% elif states("sensor.storion_grid_regulation")|int == 19 %}
+                AS4777.2-SA
+            {% elif states("sensor.storion_grid_regulation")|int == 20 %}
+                G98
+            {% elif states("sensor.storion_grid_regulation")|int == 21 %}
+                EN50549-CZ
+            {% elif states("sensor.storion_grid_regulation")|int == 22 %}
+                PEA
+            {% elif states("sensor.storion_grid_regulation")|int == 23 %}
+                MEA
+            {% elif states("sensor.storion_grid_regulation")|int == 24 %}
+                BISI
+            {% elif states("sensor.storion_grid_regulation")|int == 25 %}
+                JET-GR Series
+            {% elif states("sensor.storion_grid_regulation")|int == 28 %}
+                50Hz Default
+            {% elif states("sensor.storion_grid_regulation")|int == 29 %}
+                60Hz Default
+            {% elif states("sensor.storion_grid_regulation")|int == 30 %}
+                WAREHOUSE
+            {% elif states("sensor.storion_grid_regulation")|int == 31 %}
+                AS4777.2-NZ
+            {% elif states("sensor.storion_grid_regulation")|int == 32 %}
+                Korea
+            {% elif states("sensor.storion_grid_regulation")|int == 33 %}
+                G98/G99-IE
+            {% elif states("sensor.storion_grid_regulation")|int == 34 %}
+                NC Rfg
+            {% elif states("sensor.storion_grid_regulation")|int == 35 %}
+                UL 1741
+            {% elif states("sensor.storion_grid_regulation")|int == 36 %}
+                UL1741-Rule 21
+            {% elif states("sensor.storion_grid_regulation")|int == 37 %}
+                UL1741-Hawaiian
+            {% else %}
+              {{states("sensor.storion_grid_regulation")|int }}
+            {%- endif %}
+      - name: Storion Local IP
+        unique_id: sensor.storion_local_ip_templ
+        state: >
+            {{ (("%0X" % (4294967296|int - (states("sensor.storion_local_ip")|int)*(-1)))|string)[0:-6]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_local_ip")|int)*(-1)))|string)[2:-4]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_local_ip")|int)*(-1)))|string)[4:-2]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_local_ip")|int)*(-1)))|string)[6:]|int(base=16)|string }}
+      - name: Storion Gateway
+        unique_id: sensor.storion_gateway_templ
+        state: >
+            {{ (("%0X" % (4294967296|int - (states("sensor.storion_gateway")|int)*(-1)))|string)[0:-6]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_gateway")|int)*(-1)))|string)[2:-4]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_gateway")|int)*(-1)))|string)[4:-2]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_gateway")|int)*(-1)))|string)[6:]|int(base=16)|string }}
+      - name: Storion Subnet Mask
+        unique_id: sensor.storion_subnet_mask_templ
+        state: >
+            {{ (("%0X" % (4294967296|int - (states("sensor.storion_subnet_mask")|int)*(-1)))|string)[0:-6]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_subnet_mask")|int)*(-1)))|string)[2:-4]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_subnet_mask")|int)*(-1)))|string)[4:-2]|int(base=16)|string }}.{{ (("%0X" % (4294967296|int - (states("sensor.storion_subnet_mask")|int)*(-1)))|string)[6:]|int(base=16)|string }}
+      - name: Storion Period Control State
+        unique_id: sensor.sensor.storion_period_control_templ
+        state: >
+            {% if states("sensor.storion_time_period_control_flag")|int == 0 %}
+                Disable Time period control
+            {% elif states("sensor.storion_time_period_control_flag")|int == 1 %}
+                Enable Charge Time period control
+            {% elif states("sensor.storion_time_period_control_flag")|int == 2 %}
+                Enable discharge Time period control
+            {% elif states("sensor.storion_time_period_control_flag")|int == 3 %}
+                Enable Time period control
+            {% else %}
+              {{states("sensor.storion_time_period_control_flag")|int }}
+            {%- endif %}
