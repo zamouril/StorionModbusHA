@@ -272,6 +272,7 @@
       - name: Storion Power factor of A phase (Grid)
         unique_id: 0033H.power.factor.of.a.phase.grid
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 51
         input_type: holding
@@ -282,6 +283,7 @@
       - name: Storion Power factor of B phase (Grid)
         unique_id: 0034H.power.factor.of.b.phase.grid
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 52
         input_type: holding
@@ -292,6 +294,7 @@
       - name: Storion Power factor of C phase (Grid)
         unique_id: 0035H.power.factor.of.c.phase.grid
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 53
         input_type: holding
@@ -302,6 +305,7 @@
       - name: Storion Total Power factor (Grid)
         unique_id: 0036H.total.power.factor.grid
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 54
         input_type: holding
@@ -578,6 +582,7 @@
       - name: Storion Power factor of A phase (PV)
         unique_id: 00B3H.power.factor.of.a.phase.pv
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 179
         input_type: holding
@@ -588,6 +593,7 @@
       - name: Storion Power factor of B phase (PV)
         unique_id: 00B4H.power.factor.of.b.phase.pv
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 180
         input_type: holding
@@ -598,6 +604,7 @@
       - name: Storion Power factor of C phase (PV)
         unique_id: 00B5H.power.factor.of.c.phase.pv
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 181
         input_type: holding
@@ -608,6 +615,7 @@
       - name: Storion Total Power factor (PV)
         unique_id: 00B6H.total.power.factor.pv
         device_class: power_factor
+        unit_of_measurement: 'PF'
         slave: 85
         address: 182
         input_type: holding
@@ -1692,5 +1700,3 @@
         count: 1
         scale: 1
         offset: 0
-
-
